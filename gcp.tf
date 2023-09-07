@@ -115,7 +115,7 @@ resource "google_compute_autoscaler" "auto-scaler" {
 }
 
 resource "google_compute_health_check" "example_health_check" {
-  name               = "example-health-check"
+  name               = "custom-health-check"
   check_interval_sec  = var.check_interval_sec
   timeout_sec         = var.timeout_sec
   healthy_threshold   = var.healthy_threshold
@@ -126,12 +126,12 @@ resource "google_compute_health_check" "example_health_check" {
 }
 
 resource "google_compute_global_address" "default-static-ip" {
-  name     = "default-static-ip"
+  name     = "custom-static-ip"
 }
 
 
 resource "google_compute_global_forwarding_rule" "default-forwarding-rule" {
-  name                  = "default-forwarding-rule"
+  name                  = "custom-forwarding-rule"
   ip_protocol           = "TCP"
   load_balancing_scheme = "EXTERNAL"
   port_range            = "80"
@@ -140,12 +140,12 @@ resource "google_compute_global_forwarding_rule" "default-forwarding-rule" {
 }
 
 resource "google_compute_target_http_proxy" "default-target-http-proxy" {
-  name     = "default-target-http-proxy"
+  name     = "custom-target-http-proxy"
   url_map  = google_compute_url_map.default-url-map.id
 }
 
 resource "google_compute_url_map" "default-url-map" {
-  name            = "default-url-map"
+  name            = "custom-external-load-balancer"
   default_service = google_compute_backend_service.default-backend-service.id
 }
 
